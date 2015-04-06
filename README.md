@@ -43,7 +43,7 @@ to pull it from the Docker Hub:
 
 If you start the image without supplying your code, e.g.,
 
-	docker run -t -i -p 80:80 -p 3306:3306 --name website dgraziotin/apache-php
+	docker run -t -i -p 80:80 --name website dgraziotin/apache-php
 
 At http://[boot2docker ip, e.g., 192.168.59.103] you should see an 
 "Hello world!" page.
