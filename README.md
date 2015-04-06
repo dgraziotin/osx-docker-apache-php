@@ -2,8 +2,8 @@
 
 osx-docker-apache-php, which is known as 
 [dgraziotin/apache-php](https://registry.hub.docker.com/u/dgraziotin/apache-php/) 
-in the Docker Hub, is a reduced fork of 
-[dgraziotin/apache-php](https://github.com/dgraziotin/osx-docker-lamp), 
+is a reduced fork of 
+[dgraziotin/osx-docker-lamp](https://github.com/dgraziotin/osx-docker-lamp), 
 which is an "Out-of-the-box LAMP image (PHP+MySQL) for Docker". 
 
 osx-docker-apache-php is instead an:
