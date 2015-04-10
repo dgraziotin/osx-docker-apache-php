@@ -3,10 +3,18 @@ MAINTAINER Daniel Graziotin <daniel@ineed.coffee>
 
 # based on dgraziotin/docker-osx-lamp
 # MAINTAINER Fernando Mayo <fernando@tutum.co>, Feng Honglin <hfeng@tutum.co>
+ENV DOCKER_USER_ID 501 
+ENV DOCKER_USER_GID 20
+
+ENV BOOT2DOCKER_ID 1000
+ENV BOOT2DOCKER_GID 50
 
 # Tweaks to give Apache/PHP write permissions to the app
-RUN usermod -u 1000 www-data && \
+RUN usermod -u ${BOOT2DOCKER_ID} www-data && \
     usermod -G staff www-data
+
+RUN groupmod -g $(($BOOT2DOCKER_GID + 10000)) $(getent group $BOOT2DOCKER_GID | cut -d: -f1)
+RUN groupmod -g ${BOOT2DOCKER_GID} staff
 
 # Install packages
 ENV DEBIAN_FRONTEND noninteractive
