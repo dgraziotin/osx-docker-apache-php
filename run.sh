@@ -5,6 +5,10 @@ sed -ri -e "s/^upload_max_filesize.*/upload_max_filesize = ${PHP_UPLOAD_MAX_FILE
 
 sed -i "s/export APACHE_RUN_GROUP=www-data/export APACHE_RUN_GROUP=staff/" /etc/apache2/envvars
 
+if [ -n "$APACHE_ROOT" ];then
+    rm -f /var/www/html && ln -s "/app/${APACHE_ROOT}" /var/www/html
+fi
+
 if [ -n "$VAGRANT_OSX_MODE" ];then
     usermod -u $DOCKER_USER_ID www-data
     groupmod -g $(($DOCKER_USER_GID + 10000)) $(getent group $DOCKER_USER_GID | cut -d: -f1)

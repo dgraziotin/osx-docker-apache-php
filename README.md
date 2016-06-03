@@ -94,7 +94,7 @@ Apache runs as user www-data and group staff. The write support works because th
 user www-data is configured to have the same user id as the one employed by boot2docker (1000).
 
 ##Environment variables
-
+- `APACHE_ROOT` tells Apache which folder within the app volume so serve as the web root.
 - `PHP_UPLOAD_MAX_FILESIZE="10M"` will change PHP upload_max_filesize config value
 - `PHP_POST_MAX_SIZE="10M"` will change PHP post_max_size config value
 -`VAGRANT_OSX_MODE="true"` for enabling Vagrant-compatibility
