@@ -19,11 +19,13 @@ RUN groupmod -g ${BOOT2DOCKER_GID} staff
 # Install packages
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update && \
-  apt-get -y install supervisor wget git apache2 libapache2-mod-php5 php5-mysql pwgen php-apc php5-mcrypt zip unzip  && \
+  apt-get -y install apt-utils && \
+  apt-get -y install supervisor wget git apache2 php libapache2-mod-php mcrypt php-mcrypt php-mbstring php-gettext php-mysql php-zip pwgen zip unzip  && \
   echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
 # needed for phpMyAdmin
-run php5enmod mcrypt
+run phpenmod mcrypt
+run phpenmod mbstring
 
 # Add image configuration and scripts
 ADD start-apache2.sh /start-apache2.sh
