@@ -1,4 +1,5 @@
 #osx-docker-apache-php, a.k.a dgraziotin/apache-php
+As of [Docker for Mac v1.12.0](https://docs.docker.com/engine/installation/mac/), there is no need for using my Docker images anymore. Thanks for the support!
     
     Out-of-the-box Apache+PHP Docker image that *just works* on Mac OS X. 
     Including write support for mounted volumes (Website).
