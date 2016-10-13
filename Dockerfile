@@ -9,6 +9,11 @@ ENV DOCKER_USER_GID 20
 ENV BOOT2DOCKER_ID 1000
 ENV BOOT2DOCKER_GID 50
 
+#Environment variables to configure php
+ENV PHP_UPLOAD_MAX_FILESIZE 10M
+ENV PHP_POST_MAX_SIZE 10M
+ENV PHP_MEMORY_LIMIT 512M
+
 # Tweaks to give Apache/PHP write permissions to the app
 RUN usermod -u ${BOOT2DOCKER_ID} www-data && \
     usermod -G staff www-data
@@ -20,12 +25,10 @@ RUN groupmod -g ${BOOT2DOCKER_GID} staff
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update && \
   apt-get -y install apt-utils && \
-  apt-get -y install supervisor wget git apache2 php libapache2-mod-php mcrypt php-mcrypt php-mbstring php-gettext php-mysql php-zip pwgen zip unzip  && \
+  apt-get -y install supervisor wget git apache2 php libapache2-mod-php mcrypt php-mcrypt php-mbstring php-gettext php-mysql php-zip pwgen zip unzip php-gd  php-imagick php-bz2 && \
   echo "ServerName localhost" >> /etc/apache2/apache2.conf
 
-# needed for phpMyAdmin
-run phpenmod mcrypt
-run phpenmod mbstring
+RUN for i in /etc/php/7.0/mods-available/*.ini;do phpenmod $(basename $i .ini); done
 
 # Add image configuration and scripts
 ADD start-apache2.sh /start-apache2.sh
@@ -40,10 +43,6 @@ RUN a2enmod rewrite
 # Configure /app folder with sample app
 RUN mkdir -p /app && rm -fr /var/www/html && ln -s /app /var/www/html
 ADD app/ /app
-
-#Environment variables to configure php
-ENV PHP_UPLOAD_MAX_FILESIZE 10M
-ENV PHP_POST_MAX_SIZE 10M
 
 # Add volumes for the app and MySql
 VOLUME  ["/app" ]

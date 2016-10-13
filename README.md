@@ -1,5 +1,8 @@
 #osx-docker-apache-php, a.k.a dgraziotin/apache-php
-As of [Docker for Mac v1.12.0](https://docs.docker.com/engine/installation/mac/), there is no need for using my Docker images anymore. Thanks for the support!
+
+As of [Docker for Mac v1.12.0](https://docs.docker.com/engine/installation/mac/), 
+there is no *need* for using my Docker images anymore. You can still use them if you like.
+I will be using them and supporting them.
     
     Out-of-the-box Apache+PHP Docker image that *just works* on Mac OS X. 
     Including write support for mounted volumes (Website).
@@ -38,6 +41,8 @@ to pull it from the Docker Hub:
     docker pull dgraziotin/apache-php
 
 ###Vagrant
+
+** Warning: I will remove Vagrant support in a coming release**
 
 If, for any reason, you would rather use Vagrant (I suggest using [AntonioMeireles/boot2docker-vagrant-box](https://github.com/AntonioMeireles/boot2docker-vagrant-box)), you need to add the following three variables when running your box:
 
@@ -98,6 +103,7 @@ user www-data is configured to have the same user id as the one employed by boot
 - `APACHE_ROOT` tells Apache which folder within the app volume so serve as the web root.
 - `PHP_UPLOAD_MAX_FILESIZE="10M"` will change PHP upload_max_filesize config value
 - `PHP_POST_MAX_SIZE="10M"` will change PHP post_max_size config value
+- `PHP_MEMORY_LIMIT="256M"` will change PHP memory_limit config value
 -`VAGRANT_OSX_MODE="true"` for enabling Vagrant-compatibility
 -`DOCKER_USER_ID=$(id -u)` for letting Vagrant use your host user ID for mounted folders
 -`DOCKER_USER_GID=$(id -g)` for letting Vagrant use your host user GID for mounted folders
